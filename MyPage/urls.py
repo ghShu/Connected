@@ -16,10 +16,10 @@ At project level, this urls.py can connect app-level urls together.
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
+from MyPage.views import HelloDjango
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('MyPage/', include('MyPage.urls')),
+    path('', HelloDjango.as_view(), name='Hello Django!'),
 ]
