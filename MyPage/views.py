@@ -3,7 +3,14 @@ This module handles the requests from Connected/urls.py.
 """
 
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import (TemplateView, 
+                                  ListView,
+                                  DetailView)
+from django.views.generic.edit import (CreateView,
+                                       UpdateView,
+                                       DeleteView)
+
+from MyPage.models import Post
 
 # Create your views here.
 # Django views: 
@@ -12,3 +19,30 @@ from django.views.generic import TemplateView
 
 class HelloDjango(TemplateView):
     template_name = 'test.html'
+
+
+class PostsView(ListView):
+    """
+    https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-display/#django.views.generic.list.ListView
+    """
+    model = Post                 # Connect View with Model
+    template_name = 'index.html' # This connects View with Template
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post_detail.html'
+
+
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post_create.html'
+    
+    # fields should come from model
+    fields = '__all__'
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'post_update.html'
+    fields = ['title']

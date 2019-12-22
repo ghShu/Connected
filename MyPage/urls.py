@@ -18,8 +18,19 @@ At project level, this urls.py can connect app-level urls together.
 from django.contrib import admin
 from django.urls import path
 
-from MyPage.views import HelloDjango
+from MyPage.views import (HelloDjango, 
+                          PostsView,
+                          PostDetailView,
+                          PostCreateView,
+                          PostUpdateView)
 
 urlpatterns = [
-    path('', HelloDjango.as_view(), name='Hello Django!'),
+    path('', HelloDjango.as_view(), name='hellodajango'),
+    path('posts/', PostsView.as_view(), name='posts'),
+    # use <int:pk> as primary key to search specific item in database
+    # The primary key will be passed in URL
+    path('posts/<int:pk>', PostDetailView.as_view(), name='post_detail'),
+    # path('posts/1', PostDetailView.as_view(), name='post_detail'), 
+    path('post/new/', PostCreateView.as_view(), name='make_post'),
+    path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update')
 ]
