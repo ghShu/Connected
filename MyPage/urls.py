@@ -22,7 +22,8 @@ from MyPage.views import (HelloDjango,
                           PostsView,
                           PostDetailView,
                           PostCreateView,
-                          PostUpdateView)
+                          PostUpdateView,
+                          PostDeleteView)
 
 urlpatterns = [
     path('', HelloDjango.as_view(), name='hellodajango'),
@@ -32,5 +33,8 @@ urlpatterns = [
     path('posts/<int:pk>', PostDetailView.as_view(), name='post_detail'),
     # path('posts/1', PostDetailView.as_view(), name='post_detail'), 
     path('post/new/', PostCreateView.as_view(), name='make_post'),
-    path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update')
+    path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update'),
+    path('post/delete/<int:pk>', PostDeleteView.as_view(), name='post_delete'),
 ]
+
+
