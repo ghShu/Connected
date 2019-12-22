@@ -1,0 +1,11 @@
+<h1>Login</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+<!-- what should be the redict after login? -->
+<!-- Django also provides default method to handle this, 
+    which can be set up in settings.py -->
