@@ -26,7 +26,7 @@ from MyPage.views import (HelloDjango,
                           PostDeleteView)
 
 urlpatterns = [
-    path('', HelloDjango.as_view(), name='hellodajango'),
+    path('', HelloDjango.as_view(), name='hellodjango'),
     path('posts/', PostsView.as_view(), name='posts'),
     # use <int:pk> as primary key to search specific item in database
     # The primary key will be passed in URL

@@ -9,6 +9,8 @@ from django.views.generic import (TemplateView,
 from django.views.generic.edit import (CreateView,
                                        UpdateView,
                                        DeleteView)
+from django.urls import (reverse,
+                         reverse_lazy)                                       
 
 from MyPage.models import Post
 
@@ -51,3 +53,7 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'post_delete.html'
+    # Django does not allow reverse while deletting
+    # Therefore, reverse_lazy should be used
+    # https://docs.djangoproject.com/en/3.0/ref/urlresolvers/#reverse-lazy 
+    success_url = reverse_lazy("posts")    
