@@ -17,10 +17,12 @@ At project level, this urls.py can connect app-level urls together.
 """
 from django.contrib import admin
 from django.urls import path, include
+from MyPage.views import SignUp
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('MyPage/', include('MyPage.urls')),
     path('auth/', include('django.contrib.auth.urls')),
+    path('auth/signup', SignUp.as_view(), name='signup'),
 ]

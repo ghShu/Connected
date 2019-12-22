@@ -9,6 +9,7 @@ from django.views.generic import (TemplateView,
 from django.views.generic.edit import (CreateView,
                                        UpdateView,
                                        DeleteView)
+from django.contrib.auth.forms import UserCreationForm
 from django.urls import (reverse,
                          reverse_lazy)                                       
 
@@ -57,3 +58,9 @@ class PostDeleteView(DeleteView):
     # Therefore, reverse_lazy should be used
     # https://docs.djangoproject.com/en/3.0/ref/urlresolvers/#reverse-lazy 
     success_url = reverse_lazy("posts")    
+
+
+class SignUp(CreateView):
+    form_class = UserCreationForm
+    template_name = 'signup.html'
+    success_url = reverse_lazy('login')

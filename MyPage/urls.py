@@ -19,11 +19,12 @@ from django.contrib import admin
 from django.urls import path
 
 from MyPage.views import (HelloDjango, 
-                          PostsView,
-                          PostDetailView,
-                          PostCreateView,
-                          PostUpdateView,
-                          PostDeleteView)
+                             PostsView,
+                             PostDetailView,
+                             PostCreateView,
+                             PostUpdateView,
+                             PostDeleteView,
+                             SignUp)
 
 urlpatterns = [
     path('', HelloDjango.as_view(), name='hellodjango'),

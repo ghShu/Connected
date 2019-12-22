@@ -2,6 +2,26 @@
 <!-- Can settings.py and static be available at app level?-->
 {% load static %}
 
+<!-- Unordered list -->
+<ul>
+    <!-- request means current HttpRequest -->
+    {% if request.user.is_authenticated %}
+        <li>
+            Hi, {{request.user.username}}
+        </li>
+        <li>
+            <a href="{% url 'logout' %}">Logout</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'login' %}">Login</a>
+        </li>
+        <li>
+            <a href="{% url 'signup' %}">Signup</a>
+        </li>
+    {% endif %}
+</ul>
+
 <!-- Add an anchor for make_post to create form-->
 <div>
     <a href="{% url 'make_post' %}">Make Post</a>

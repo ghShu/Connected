@@ -125,3 +125,6 @@ STATIC_URL = '/static/'
 
 # name of redirect url after login
 LOGIN_REDIRECT_URL = 'posts'
+
+# Logout related environment
+LOGOUT_REDIRECT_URL = 'posts'
