@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 from django.urls import reverse
 from imagekit.models import ProcessedImageField
 
@@ -23,3 +25,14 @@ class Post(models.Model):
         post_detail --> urls.py to find the url
         """
         return reverse("post_detail", args=[str(self.id)])
+
+# Need to tell Django to not use the default user models, but this one.
+# Do this in settings.py
+class ConnectedUser(AbstractUser):
+    profile_pic = ProcessedImageField(
+        upload_to ='static/images/profiles',
+        format='JPEG',
+        options={'quality':100},
+        blank=True,
+        null=True 
+    )

@@ -9,7 +9,10 @@ from django.views.generic import (TemplateView,
 from django.views.generic.edit import (CreateView,
                                        UpdateView,
                                        DeleteView)
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
+from MyPage.forms import CustomUserCreationForm
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import (reverse,
                          reverse_lazy)                                       
 
@@ -37,12 +40,12 @@ class PostDetailView(DetailView):
     template_name = 'post_detail.html'
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
-    
     # fields should come from model
     fields = '__all__'
+    login_url = 'login'
 
 
 class PostUpdateView(UpdateView):
@@ -61,6 +64,6 @@ class PostDeleteView(DeleteView):
 
 
 class SignUp(CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy('login')
