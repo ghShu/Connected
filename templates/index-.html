@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Add an anchor for make_post to create form-->
+    <div>
+        <a href="{% url 'make_post' %}">Make Post</a>
+
+    </div>
+
+    <div>
+        <!-- %% represents HTML templating language inside html -->
+        <!-- object_list is created when view is exectuing, containing a list of objects-->
+        <!-- check the django doc for ListView -->
+        <!-- You can also use the pl. of model name defined in views.py for object_list -->
+        <!-- This also means thie html file is automatically connected with views.py -->
+        {% for post in object_list %}  
+        <!-- {{post.image}} is also django syntax-->
+        <!-- <a href="/MyPage/"> -->
+    
+        <a href="{% url 'post_detail' post.id%}">
+            <img src="/{{post.image}}">  
+        </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

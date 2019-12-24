@@ -31,10 +31,10 @@ from MyPage.views import (
 )
 
 urlpatterns = [
-    path('', PostListView.as_view(), name='posts'),
+    path('', PostListView.as_view(), name='home'),
     # use <int:pk> as primary key to search specific item in database
     # The primary key will be passed in URL
-    path('posts/<int:pk>', PostDetailView.as_view(), name='post_detail'),
+    path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
     # path('posts/1', PostDetailView.as_view(), name='post_detail'), 
     path('post/new/', PostCreateView.as_view(), name='make_post'),
     path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update'),

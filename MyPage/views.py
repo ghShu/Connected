@@ -34,7 +34,7 @@ class PostListView(ListView):
     https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-display/#django.views.generic.list.ListView
     """
     model = Post                 # Connect View with Model
-    template_name = 'index.html' # This connects View with Template
+    template_name = 'home.html'  # This connects View with Template
 
 
 class PostDetailView(DetailView):
