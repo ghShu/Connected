@@ -22,7 +22,8 @@ from MyPage.views import SignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('MyPage/', include('MyPage.urls')),
+    path('', include('MyPage.urls')),
     path('auth/', include('django.contrib.auth.urls')),
-    path('auth/signup', SignUp.as_view(), name='signup'),
+    # path('auth/signup', SignUp.as_view(), name='signup'),
+    # path('MyPage/', include('MyPage.urls')),
 ]

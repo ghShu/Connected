@@ -25,7 +25,7 @@ SECRET_KEY = '3a83xgvnf%^falm9l^jrn8p1rag^@j8z9_!3&#_v6@77i-i-+#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,6 @@ LOGIN_REDIRECT_URL = 'posts'
 
 # Logout related environment
 LOGOUT_REDIRECT_URL = 'posts'
+
+# Use user-defined user model
+AUTH_USER_MODEL = 'MyPage.ConnectedUser'

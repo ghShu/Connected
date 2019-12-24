@@ -1,46 +1,64 @@
-<!-- load the static content defined in settings.py of Connected -->
-<!-- Can settings.py and static be available at app level?-->
-{% load static %}
+{% extends 'base.html' %}
 
-<!-- Unordered list -->
-<ul>
-    <!-- request means current HttpRequest -->
-    {% if request.user.is_authenticated %}
-        <li>
-            Hi, {{request.user.username}}
-        </li>
-        <li>
-            <a href="{% url 'logout' %}">Logout</a>
-        </li>
-    {% else %}
-        <li>
-            <a href="{% url 'login' %}">Login</a>
-        </li>
-        <li>
-            <a href="{% url 'signup' %}">Signup</a>
-        </li>
-    {% endif %}
-</ul>
+{% load custom_tags %}
 
-<!-- Add an anchor for make_post to create form-->
-<div>
-    <a href="{% url 'make_post' %}">Make Post</a>
+{% block title %}Index{% endblock %}
 
-</div>
-
-<div>
-    <!-- %% represents HTML templating language inside html -->
-    <!-- object_list is created when view is exectuing, containing a list of objects-->
-    <!-- check the django doc for ListView -->
-    <!-- You can also use the pl. of model name defined in views.py for object_list -->
-    <!-- This also means thie html file is automatically connected with views.py -->
-    {% for post in object_list %}  
-    <!-- {{post.image}} is also django syntax-->
-    <!-- <a href="/MyPage/"> -->
-    
-    <a href="{% url 'post_detail' post.id%}">
-        <img src="/{{post.image}}">  
-    </a>
-    {% endfor %}
-
-</div>>
+{% block content %}
+    <div class="cards-listing">
+        {% for post in object_list %}
+        <!-- component and layout are two important concepts in bootstrap -->
+        <!-- row is basic layout in bootstrap -->
+        <!-- row imporves structure and responsive of a page -->
+             <div class="row">
+                <div class="card view-update {{ post.pk }}">
+                    <div class="card__panel-head">
+                        <div class="poster__info">
+                            <a href="{% url 'hellodjango' %}" class="poster__name">
+                                {% if post.author.profile_pic %}
+                                    <img class="poster__profilepic" src="/{{ post.author.profile_pic }}">
+                                {% endif %}
+                                {{ post.author.username }}
+                            </a>
+                            <span class="poster__timestamp">
+                                {{ post.posted_on|timesince }}
+                            </span>
+                        </div>
+                    </div>
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <img class="card__main-image" src="/{{ post.image }}">
+                    </a>
+                    <div class="card__panel-body">
+                        <div class="likes">
+                            {% if post.get_like_count %}
+                                {{ post.get_like_count }} like{% if post.get_like_count > 1 %}s{% endif %}
+                            {% endif %}
+                        </div>
+                        <ul class="comment-list">
+                          <a class="view-more"></a>
+                          {% for comment in post.comments.all %}
+                            <li class="comment-list__comment">
+                              {% comment %}
+                              <a href="{% url 'profile' comment.user.pk %}" class="user">
+                                {{ comment.user.username }}
+                              </a>
+                              {% endcomment %}
+                              <span class="comment">{{ comment.comment }}</span>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                        <section class="input-row">
+                            <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>
+                            <div class="comment-input-wrapper">
+                                <input class="add-comment" type="text" placeholder="Add a comment...">
+                            </div>
+                            <div class="hidden-data {{ post.pk }}" style="display: none;">
+                                <span class="post-pk">{{ post.pk }}</span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
