@@ -31,11 +31,9 @@
         <li class="comment-list__comment">
         {% for comment in object.comments.all %}
         <li class="comment-list__comment">
-          {% comment %}
           <a href="{% url 'profile' comment.user.pk %}" class="user">
             {{ comment.user.username }}
           </a>
-          {% endcomment %}
           <span class="comment">{{ comment.comment }}</span>
         </li>
         {% endfor %}

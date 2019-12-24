@@ -18,7 +18,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import (reverse,
                          reverse_lazy)                                       
 
-from MyPage.models import Post, ConnectedUser, Like, Comment
+from MyPage.models import (Post, 
+                           ConnectedUser, 
+                           UserConnection,
+                           Like, 
+                           Comment)
 
 # Create your views here.
 # Django views: 
@@ -40,6 +44,15 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        liked = Like.objects.filter(post=self.kwargs.get('pk'), user=self.request.user).first()
+        if liked:
+            data['liked'] = 1
+        else:
+            data['liked'] = 0
+        return data
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -69,6 +82,28 @@ class SignUp(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy('login')
+
+
+class UserProfile(LoginRequiredMixin, DetailView):
+    model = ConnectedUser
+    template_name = 'user_profile.html'
+    login_url = 'login'
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    model = ConnectedUser
+    template_name = 'edit_profile.html'
+    fields = ['profile_pic', 'username']
+    login_url = 'login'
+
+
+class ExploreView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'explore.html'
+    login_url = 'login'
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-posted_on')[:20]
 
 
 @ajax_request
