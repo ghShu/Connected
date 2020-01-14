@@ -1,1 +1,1 @@
-A Tiny Instragram!
+A Tiny Instagram!
