@@ -42,7 +42,7 @@ INSTALLED_APPS = [
                                        # https://github.com/evansd/whitenoise
     'MyPage',
     'imagekit',
-    'pillow'
+    'pillow',
 ]
 
 MIDDLEWARE = [
