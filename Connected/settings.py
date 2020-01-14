@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',   # http://whitenoise.evans.io/en/stable/django.html
                                        # https://github.com/evansd/whitenoise
     'MyPage',
-    'imagekit'
+    'imagekit',
+    'pillow'
 ]
 
 MIDDLEWARE = [

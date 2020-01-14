@@ -12,6 +12,7 @@ django-imagekit = '*'
 django-annoying = '*'
 gunicorn = "*"
 whitenoise = "*"
+imagekit = "*"
 
 [requires]
 python_version = "3.7"
