@@ -50,7 +50,7 @@ urlpatterns = [
     path('comment', addComment, name='addComment'),
     path('hello', HelloDjango.as_view(), name='hellodjango'),
     path('auth/signup', SignUp.as_view(), name='signup'),
-    # path('explore', ExploreView.as_view(), name='explore'),
+    path('explore', ExploreView.as_view(), name='explore'),
 ]
 
 

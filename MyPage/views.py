@@ -33,13 +33,21 @@ class HelloDjango(TemplateView):
     template_name = 'test.html'
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     """
     https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-display/#django.views.generic.list.ListView
     """
     model = Post                 # Connect View with Model
     template_name = 'home.html'  # This connects View with Template
 
+    login_url = "login"
+
+    def get_queryset(self):
+        current_user = self.request.user
+        following = set()
+        for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
+            following.add(conn.following)
+        return Post.objects.filter(author__in=following)
 
 class PostDetailView(DetailView):
     model = Post
