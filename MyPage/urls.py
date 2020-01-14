@@ -27,14 +27,18 @@ from MyPage.views import (
     PostDeleteView,
     SignUp,
     addLike,
-    addComment
+    addComment,
+    UserProfile,
+    toggleFollow,
+    EditProfile,
+    ExploreView,
 )
 
 urlpatterns = [
     path('', PostListView.as_view(), name='home'),
     # use <int:pk> as primary key to search specific item in database
     # The primary key will be passed in URL
-    path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     # path('posts/1', PostDetailView.as_view(), name='post_detail'), 
     path('post/new/', PostCreateView.as_view(), name='make_post'),
     path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update'),
@@ -46,6 +50,7 @@ urlpatterns = [
     path('comment', addComment, name='addComment'),
     path('hello', HelloDjango.as_view(), name='hellodjango'),
     path('auth/signup', SignUp.as_view(), name='signup'),
+    # path('explore', ExploreView.as_view(), name='explore'),
 ]
 
 

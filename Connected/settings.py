@@ -124,10 +124,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 
 # name of redirect url after login
-LOGIN_REDIRECT_URL = 'posts'
+LOGIN_REDIRECT_URL = 'home'
 
 # Logout related environment
-LOGOUT_REDIRECT_URL = 'posts'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Use user-defined user model
 AUTH_USER_MODEL = 'MyPage.ConnectedUser'
